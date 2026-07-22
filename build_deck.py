@@ -206,190 +206,261 @@ dotted_arrow(s, g2x + 3.9, GY, fx + 5 * (cw + gap_w) + 0.75, FY + FH + 0.03,
              color=RED, width=1.25)
 
 # =====================================================================
-# SLIDE 3
+# SLIDE 3 — the two gaps + $250k split (pie quadrant)
 # =====================================================================
 s = add_slide(prs)
-chrome(s, 3, "Our proposal — $250k deployed on the first & last mile",
-       "Two targeted, technology-led interventions that convert the grant into permanent "
-       "capability — not one year of operating expense.",
-       takeaway="Not funding a year of operations — installing a permanent upgrade that "
-                "pays for itself, every year.")
+chrome(s, 3, "The two gaps — and the $250,000 that closes them",
+       "The gaps highlighted in the supply chain, the grant that closes them, and the "
+       "solution we build for each — all in one view.",
+       takeaway="Two fixable gaps, two targeted builds — $250k of capital becomes "
+                "$310k of savings, every year.")
 
-# allocation
-cy = section(s, ML, 1.48, SW - 2*ML, "Allocation of the $250,000 grant", accent=NAVY)
-bar_y = cy + 0.06; bar_h = 0.48
-bx = ML + 0.15; bw_total = SW - 2*ML - 0.3
-w1 = bw_total * 0.6; w2 = bw_total * 0.4
-rect(s, bx, bar_y, w1, bar_h, fill=NAVY, line=None)
-rect(s, bx + w1, bar_y, w2, bar_h, fill=GREEN, line=None)
-_, tf = tb(s, bx, bar_y, w1, bar_h, anchor=MSO_ANCHOR.MIDDLE)
-para(tf, "$150k — Solution 1: Predictive demand planning (60%)", size=9.5, color=WHITE,
-     bold=True, align=PP_ALIGN.CENTER, first=True, space_after=0)
-_, tf = tb(s, bx + w1, bar_y, w2, bar_h, anchor=MSO_ANCHOR.MIDDLE)
-para(tf, "$100k — Solution 2:\nSmart distribution (40%)", size=9.5, color=WHITE,
-     bold=True, align=PP_ALIGN.CENTER, first=True, space_after=0, line_spacing=0.95)
-_, tf = tb(s, bx, bar_y + bar_h + 0.05, w1, 0.26)
-para(tf, "Fixes the costliest gap first: waste & procurement inefficiency at source",
-     size=7.2, color=GRAY, align=PP_ALIGN.CENTER, first=True, space_after=0)
-_, tf = tb(s, bx + w1, bar_y + bar_h + 0.05, w2, 0.26)
-para(tf, "Every meal on time, intact & untouched", size=7.2, color=GRAY,
-     align=PP_ALIGN.CENTER, first=True, space_after=0)
+PANEL3 = RGBColor(0xF4, 0xF4, 0xF4)
+QX3 = [ML, 5.08]; QW3 = 4.52
+QY3 = [1.46, 4.02]; QH3 = [2.46, 2.44]
+for gx in range(2):
+    for gy in range(2):
+        rect(s, QX3[gx], QY3[gy], QW3, QH3[gy], fill=PANEL3, line=None)
 
-# two solutions
-S3Y = 2.92
-vline(s, 4.77, S3Y + 0.05, 4.62)
-cy = section(s, ML, S3Y, 4.42, "Solution 1 — “Annapurna AI” · $150k", accent=NAVY,
-             size=10.5)
-_, tf = tb(s, ML, cy, 4.42, 1.30)
-para(tf, [("What: ", True, NAVY),
-          ("ML demand-forecasting & procurement-planning platform across all 68 kitchens",
-           False, TEXT)], size=7.8, first=True, line_spacing=1.0)
-para(tf, [("How: ", True, NAVY),
-          ("predicts school-level attendance from history, calendars & seasonality; "
-           "auto-generates indents and forward procurement schedules", False, TEXT)],
-     size=7.8, line_spacing=1.0)
-para(tf, [("Impact: ", True, NAVY),
-          ("cuts food waste ~70%, buys ahead of price spikes", False, TEXT),
-          ("  →  est. $230k saved / yr [dummy]", True, GREEN)], size=7.8, space_after=0,
-     line_spacing=1.0)
+def qhead3(x, y, text, accent):
+    rect(s, x, y + 0.03, 0.06, 0.20, fill=accent, line=None)
+    _, tf = tb(s, x + 0.15, y, 3.2, 0.26)
+    para(tf, text, size=10.5, color=NAVY, bold=True, first=True, space_after=0)
 
-cy = section(s, 5.02, S3Y, SW - ML - 5.02, "Solution 2 — “Last-Mile Shield” · $100k",
-             accent=GREEN, size=10.5)
-_, tf = tb(s, 5.02, cy, SW - ML - 5.02, 1.30)
-para(tf, [("What: ", True, NAVY),
-          ("AI route optimisation + van telematics (GPS, cameras, RFID tags) + geofenced "
-           "smart locks", False, TEXT)], size=7.8, first=True, line_spacing=1.0)
-para(tf, [("How: ", True, NAVY),
-          ("routes sequenced to each school's lunch bell; van doors unlock only within "
-           "150 m of a registered school — no diversion, no adulteration", False, TEXT)],
-     size=7.8, line_spacing=1.0)
-para(tf, [("Impact: ", True, NAVY),
-          ("99%+ on-time, −18% fleet km, zero shrinkage", False, TEXT),
-          ("  →  est. $80k saved / yr [dummy]", True, GREEN)], size=7.8, space_after=0,
-     line_spacing=1.0)
-
-# flywheel — horizontal cycle
-cy = section(s, ML, 4.55, SW - 2*ML, "The savings flywheel — how impact compounds",
-             accent=ORANGE)
-pw2, ph2 = 1.85, 0.52
-pxs = [ML + 0.10 + i * (pw2 + 0.45) for i in range(4)]
-ptexts = ["Grant funds\ntech — once", "Savings of\n$310k / yr", "Reinvested in\nmore meals",
-          "More data →\nbetter models"]
-pcols = [NAVY, GREEN, ORANGE, MIDBLUE]
-py3 = cy + 0.04
-for px3, t, c in zip(pxs, ptexts, pcols):
-    rect(s, px3, py3, pw2, ph2, fill=WHITE, line=c, line_w=1.25,
-         shape=MSO_SHAPE.ROUNDED_RECTANGLE, radius=0.25)
-    _, tf = tb(s, px3, py3 + 0.02, pw2, ph2 - 0.04, anchor=MSO_ANCHOR.MIDDLE)
-    para(tf, t, size=7.2, color=c, bold=True, align=PP_ALIGN.CENTER, first=True,
-         space_after=0, line_spacing=0.92)
-for i in range(3):
-    dotted_arrow(s, pxs[i] + pw2 + 0.04, py3 + ph2/2, pxs[i+1] - 0.04, py3 + ph2/2,
-                 color=GRAY, curve=False, width=1.1)
-_, tf = tb(s, ML, py3 + ph2 + 0.04, SW - 2*ML, 0.20)
-para(tf, "…and the cycle repeats — every year, without further funding", size=7,
-     color=GRAY, italic=True, first=True, space_after=0, align=PP_ALIGN.CENTER)
-
-# unlocks
-cy = section(s, ML, 5.74, SW - 2*ML, "What the grant unlocks — every year, in perpetuity",
-             accent=GREEN)
-qw = (SW - 2*ML) / 5
-for i, (v, c) in enumerate([("$310k", "combined annual\nsavings (1.24x grant)"),
-                            ("+105,000", "additional children\nfed per year"),
-                            ("~70%", "reduction in\nfood wastage"),
-                            ("99%+", "meals inside the\nlunch window"),
-                            ("<10 mo", "payback on the\nfull $250k")]):
-    stat(s, ML + i*qw, cy - 0.06, qw, v, c, vsize=12.5, csize=6.3)
-
-# =====================================================================
-# SLIDE 4
-# =====================================================================
-s = add_slide(prs)
-chrome(s, 4, "Solution 1 — “Annapurna AI”: predict demand, buy smart",
-       "$150k builds a demand-forecasting and procurement-planning engine that ends "
-       "over-production and peak-price buying across all 68 kitchens.",
-       takeaway="Every rupee not wasted is a meal served — forecasting turns waste into "
-                "105,000 more children fed each year.")
-
-# left: problem
-P4W = 3.45
-cy = section(s, ML, 1.48, P4W, "The problem today", accent=RED)
-_, tf = tb(s, ML, cy, P4W, 1.35)
+qhead3(QX3[0] + 0.15, QY3[0] + 0.12, "GAP 1 — Procurement", RED)
+_, tf = tb(s, QX3[0] + 0.18, QY3[0] + 0.50, 3.05, 1.85)
 para(tf, [("•  Manual, gut-feel indenting", True, TEXT),
-          (" 3 days ahead — blind to attendance swings & holidays", False, TEXT)],
-     size=7.6, first=True, line_spacing=1.0)
-para(tf, [("•  Spot purchases", True, TEXT),
-          (" at mandi peak prices when stocks run short", False, TEXT)], size=7.6,
-     line_spacing=1.0)
+          (" — blind to attendance swings, exams & holidays", False, TEXT)],
+     size=8, first=True, line_spacing=1.04)
+para(tf, [("•  Reactive spot-buying", True, TEXT),
+          (" at mandi peak prices; no price intelligence", False, TEXT)],
+     size=8, line_spacing=1.04)
 para(tf, [("•  No feedback loop", True, TEXT),
-          (" from schools on actual meal uptake", False, TEXT)], size=7.6,
-     space_after=0, line_spacing=1.0)
-qw = P4W / 2
-stat(s, ML, cy + 1.02, qw, "8–10%", "meals over-produced\n& wasted [dummy]", color=RED,
-     vsize=13, csize=6.8)
-stat(s, ML + qw, cy + 1.02, qw, "+12%", "paid over plan on\nspot buys [dummy]", color=RED,
-     vsize=13, csize=6.8)
+          (" from schools on actual meal uptake", False, TEXT)],
+     size=8, line_spacing=1.04)
+para(tf, [("Cost today:  8–10% meals over-produced · +12% spot premium [dummy]",
+           True, RED)], size=8, space_after=0, line_spacing=1.04)
 
-# left: rollout
-cy = section(s, ML, 3.50, P4W, "Rollout plan", accent=ORANGE)
-_, tf = tb(s, ML, cy, P4W, 0.95)
-para(tf, [("Mo 1–4: ", True, NAVY), ("pilot in 3 Bengaluru kitchens; baseline waste "
-          "audit", False, TEXT)], size=7.4, first=True, line_spacing=1.0)
-para(tf, [("Mo 5–8: ", True, NAVY), ("model tuning; procurement-ERP integration",
-          False, TEXT)], size=7.4, line_spacing=1.0)
-para(tf, [("Mo 9–12: ", True, NAVY), ("scale to all 68 kitchens; hand over to in-house "
-          "tech team", False, TEXT)], size=7.4, space_after=0, line_spacing=1.0)
+qhead3(QX3[1] + 1.30, QY3[0] + 0.12, "GAP 2 — Distribution", RED)
+_, tf = tb(s, QX3[1] + 1.32, QY3[0] + 0.50, 3.05, 1.85)
+para(tf, [("•  Static, driver-memory routes", True, TEXT),
+          (" — late vans mean children stay hungry all day", False, TEXT)],
+     size=8, first=True, line_spacing=1.04)
+para(tf, [("•  Untracked vessels & utensils", True, TEXT),
+          ("; adulteration & diversion risk en route", False, TEXT)],
+     size=8, line_spacing=1.04)
+para(tf, [("•  No proof-of-delivery", True, TEXT),
+          (" — school shortfall disputes go unresolved", False, TEXT)],
+     size=8, line_spacing=1.04)
+para(tf, [("Cost today:  6.2% miss the lunch window · $35k/yr shrinkage [dummy]",
+           True, RED)], size=8, space_after=0, line_spacing=1.04)
 
-# left: waste chart
-cy = section(s, ML, 4.74, P4W, "Food waste — % of production", accent=NAVY, size=10.5)
-col_chart(s, ML, cy, P4W, 1.30, ["Today", "Yr 1", "Yr 2"],
-          [("Waste %", [9.0, 4.5, 2.7])], [RED], gap=80, font_size=7)
+qhead3(QX3[0] + 0.15, QY3[1] + 0.12, "SOLUTION 1 — “Annapurna AI” · $150k", NAVY)
+_, tf = tb(s, QX3[0] + 0.18, QY3[1] + 0.50, 3.05, 1.85)
+para(tf, [("What: ", True, NAVY),
+          ("ML demand-forecasting & procurement planning across all 68 kitchens",
+           False, TEXT)], size=8, first=True, line_spacing=1.04)
+para(tf, [("How: ", True, NAVY),
+          ("predicts school-level attendance; auto-generates daily indents & forward "
+           "buying schedules", False, TEXT)], size=8, line_spacing=1.04)
+para(tf, [("Rollout: ", True, GRAY),
+          ("3-kitchen pilot (Mo 1–4) → all 68 kitchens by Mo 12", False, GRAY)],
+     size=7.8, line_spacing=1.04)
+para(tf, [("→  ~70% less food waste", True, GREEN)], size=8.2, line_spacing=1.04)
+para(tf, [("→  est. $230k saved / yr [dummy]", True, GREEN)], size=8.2,
+     space_after=0, line_spacing=1.04)
 
-# right: how it works
-HX, HW = 4.15, SW - ML - 4.15
-vline(s, 3.95, 1.55, 6.45)
-cy = section(s, HX, 1.48, HW, "How it works — from signals to indents", accent=MIDBLUE)
-fy = cy + 0.04
-rect(s, HX, fy, HW, 0.66, fill=PALEBLUE, line=MIDBLUE, line_w=0.9,
-     shape=MSO_SHAPE.ROUNDED_RECTANGLE, radius=0.08)
-_, tf = tb(s, HX + 0.12, fy + 0.05, HW - 0.24, 0.58)
-para(tf, [("1 · DATA INPUTS   ", True, NAVY),
-          ("school attendance feeds • academic calendars & holidays • menu cycles • "
-           "mandi price APIs • weather & seasonality", False, TEXT)],
-     size=7.4, first=True, space_after=0, line_spacing=1.0)
-dotted_arrow(s, HX + HW/2, fy + 0.68, HX + HW/2, fy + 0.86, color=MIDBLUE, curve=False)
-rect(s, HX, fy + 0.88, HW, 0.66, fill=NAVY, line=None,
-     shape=MSO_SHAPE.ROUNDED_RECTANGLE, radius=0.08)
-_, tf = tb(s, HX + 0.12, fy + 0.93, HW - 0.24, 0.58)
-para(tf, [("2 · ML FORECASTING ENGINE   ", True, WHITE),
-          ("kitchen-wise meal-demand prediction (±2% target) • price-trend models flag "
-           "the cheapest buying windows", False, WHITE)],
-     size=7.4, first=True, space_after=0, line_spacing=1.0)
-dotted_arrow(s, HX + HW/2, fy + 1.56, HX + HW/2, fy + 1.74, color=MIDBLUE, curve=False)
-rect(s, HX, fy + 1.76, HW, 0.80, fill=PALEGREEN, line=GREEN, line_w=0.9,
-     shape=MSO_SHAPE.ROUNDED_RECTANGLE, radius=0.08)
-_, tf = tb(s, HX + 0.12, fy + 1.82, HW - 0.24, 0.72)
-para(tf, [("3 · OUTPUTS   ", True, GREEN),
-          ("auto-generated daily indents per kitchen • forward procurement schedule & "
-           "contract calendar • live waste dashboard • monthly savings report to donors "
-           "(incl. GS)", False, TEXT)], size=7.4, first=True, space_after=0,
-     line_spacing=1.0)
+qhead3(QX3[1] + 1.30, QY3[1] + 0.12, "SOLUTION 2 — “Last-Mile Shield” · $100k", GREEN)
+_, tf = tb(s, QX3[1] + 1.32, QY3[1] + 0.50, 3.05, 1.85)
+para(tf, [("What: ", True, NAVY),
+          ("AI route optimisation + telematics (GPS, cameras, RFID) + geofenced "
+           "smart locks", False, TEXT)], size=8, first=True, line_spacing=1.04)
+para(tf, [("How: ", True, NAVY),
+          ("drops sequenced to each school's lunch bell; doors unlock only near a "
+           "registered school", False, TEXT)], size=8, line_spacing=1.04)
+para(tf, [("Bonus: ", True, GRAY),
+          ("3 vans freed per hub redeployed to reach new schools", False, GRAY)],
+     size=7.8, line_spacing=1.04)
+para(tf, [("→  99%+ on-time · −18% fleet km", True, GREEN)], size=8.2,
+     line_spacing=1.04)
+para(tf, [("→  est. $80k saved / yr [dummy]", True, GREEN)], size=8.2,
+     space_after=0, line_spacing=1.04)
 
-# right bottom: donut + savings side by side
-DY = 4.74
-cy = section(s, HX, DY, 2.75, "Where the $150k goes", accent=NAVY, size=10)
-donut(s, HX - 0.05, cy - 0.04, 2.85, 1.48,
-      ["Platform $60k", "Data infra $30k", "Team $25k", "ERP integr. $20k", "Conting. $15k"],
-      [60, 30, 25, 20, 15], [NAVY, BLUE, MAGENTA, GOLD, GRAY],
-      legend=XL_LEGEND_POSITION.BOTTOM, labels=False)
-SX4 = 7.15
-cy = section(s, SX4, DY, SW - ML - SX4, "Annual savings ($k)", accent=GREEN, size=10)
-col_chart(s, SX4 - 0.05, cy, SW - ML - SX4 + 0.10, 1.28,
-          ["Waste", "Buying", "Wkg cap"], [("$k/yr", [120, 85, 25])], [GREEN],
-          gap=60, font_size=6.8)
-_, tf = tb(s, SX4 - 0.05, cy + 1.32, SW - ML - SX4 + 0.10, 0.26)
-para(tf, [("= $230k/yr → +105,000 children [dummy]", True, GREEN)], size=7,
-     first=True, space_after=0, align=PP_ALIGN.CENTER)
+ccx3, ccy3 = 5.0, 3.96
+badge_d = 2.70
+rect(s, ccx3 - badge_d/2, ccy3 - badge_d/2, badge_d, badge_d, fill=WHITE,
+     line=LTGRAY, line_w=1.0, shape=MSO_SHAPE.OVAL)
+cd3 = CategoryChartData()
+cd3.categories = ["Solution 1 — $150k", "Solution 2 — $100k"]
+cd3.add_series('s', [150, 100])
+chart_w3 = 2.55
+gf3 = s.shapes.add_chart(XL_CHART_TYPE.PIE,
+                         Inches(ccx3 - chart_w3/2), Inches(ccy3 - chart_w3/2),
+                         Inches(chart_w3), Inches(chart_w3), cd3)
+ch3 = gf3.chart
+ch3.font.size = Pt(9); ch3.font.name = SANS; ch3.has_title = False
+ch3.has_legend = False
+ser3 = ch3.series[0]
+for i, c in enumerate([NAVY, GREEN]):
+    pt = ser3.points[i]
+    pt.format.fill.solid(); pt.format.fill.fore_color.rgb = c
+    pt.format.line.color.rgb = WHITE; pt.format.line.width = Pt(2)
+plot3 = ch3.plots[0]
+plot3.has_data_labels = True
+dl3 = plot3.data_labels
+dl3.show_value = True
+dl3.number_format = '"$"0"k"'; dl3.number_format_is_linked = False
+dl3.font.size = Pt(11); dl3.font.bold = True; dl3.font.color.rgb = WHITE
+cs3 = ch3._chartSpace
+spPr3 = cs3.makeelement(qn('c:spPr'), {})
+spPr3.append(spPr3.makeelement(qn('a:noFill'), {}))
+ln3 = spPr3.makeelement(qn('a:ln'), {})
+ln3.append(ln3.makeelement(qn('a:noFill'), {}))
+spPr3.append(ln3)
+ext3 = cs3.find(qn('c:externalData'))
+if ext3 is not None:
+    ext3.addprevious(spPr3)
+else:
+    cs3.append(spPr3)
+pill_w, pill_h = 2.30, 0.40
+rect(s, ccx3 - pill_w/2, ccy3 + badge_d/2 - 0.02, pill_w, pill_h, fill=WHITE,
+     line=LTGRAY, line_w=0.9, shape=MSO_SHAPE.ROUNDED_RECTANGLE, radius=0.5)
+_, tf = tb(s, ccx3 - pill_w/2, ccy3 + badge_d/2 + 0.005, pill_w, pill_h - 0.05,
+           anchor=MSO_ANCHOR.MIDDLE)
+para(tf, [("THE $250k GRANT", True, NAVY)], size=8.5, first=True, space_after=0,
+     align=PP_ALIGN.CENTER)
+para(tf, "60 / 40 — weighted to the costlier gap", size=6.6, color=GRAY,
+     align=PP_ALIGN.CENTER, space_after=0, italic=True)
+
+# =====================================================================
+# SLIDE 4 — Solution 1 deep dive: AI-enabled planning & procurement
+# =====================================================================
+s = add_slide(prs)
+chrome(s, 4, "Solution 1 — the AI-enabled planning & procurement build ($150k)",
+       "Connecting real-time demand signals to kitchen production and procurement — "
+       "the technology that closes Gap 1.",
+       takeaway="“Feeding more children with the same rupee” — AI plus GS capital "
+                "makes it possible.")
+
+P1_HEAD = "PILLAR 1 — Predictive Demand Forecasting"
+P2_HEAD = "PILLAR 2 — Spatial-Temporal Procurement"
+for x, headtxt, hc in [(ML, P1_HEAD, TEAL), (5.08, P2_HEAD, ORANGE)]:
+    rect(s, x, 1.46, 4.52, 1.66, fill=WHITE, line=LTGRAY, line_w=0.9)
+    rect(s, x, 1.46, 4.52, 0.30, fill=hc, line=None)
+    _, tf = tb(s, x + 0.12, 1.49, 4.28, 0.25)
+    para(tf, headtxt, size=9.5, color=WHITE, bold=True, first=True, space_after=0)
+_, tf = tb(s, ML + 0.14, 1.86, 4.24, 1.20)
+para(tf, "Predicts exact meal & ingredient needs per centre by ingesting:", size=7.5,
+     color=GRAY, italic=True, first=True, space_after=2, line_spacing=1.0)
+para(tf, [("•  Attendance & enrolment trends ", True, TEXT),
+          ("estimate how many meals each centre should prepare daily", False, TEXT)],
+     size=7.5, space_after=2, line_spacing=1.02)
+para(tf, [("•  Holiday calendars ", True, TEXT),
+          ("capture local demand spikes or dips before production quantities are "
+           "finalised", False, TEXT)], size=7.5, space_after=2, line_spacing=1.02)
+para(tf, [("•  Menu consumption history ", True, TEXT),
+          ("converts expected meals into ingredient quantities for key staples",
+           False, TEXT)], size=7.5, space_after=2, line_spacing=1.02)
+para(tf, [("•  Weather signals & feedback ", True, TEXT),
+          ("continuously refine the next centre-level forecast", False, TEXT)],
+     size=7.5, space_after=0, line_spacing=1.02)
+_, tf = tb(s, 5.22, 1.86, 4.24, 1.20)
+para(tf, "Decides when and where to buy each commodity to minimise total landed cost:",
+     size=7.5, color=GRAY, italic=True, first=True, space_after=2, line_spacing=1.0)
+para(tf, [("•  Seasonal price troughs ", True, TEXT),
+          ("identify when each commodity should be bought before prices rise",
+           False, TEXT)], size=7.5, space_after=2, line_spacing=1.02)
+para(tf, [("•  Surplus-region signals ", True, TEXT),
+          ("identify where each commodity can be sourced at lower landed cost",
+           False, TEXT)], size=7.5, space_after=2, line_spacing=1.02)
+para(tf, [("•  Logistics, handling & storage costs ", True, TEXT),
+          ("are included in every sourcing recommendation", False, TEXT)],
+     size=7.5, space_after=2, line_spacing=1.02)
+para(tf, [("•  Quality grades & shelf-life rules ", True, TEXT),
+          ("are locked into the final buying plan", False, TEXT)],
+     size=7.5, space_after=0, line_spacing=1.02)
+
+# loop with numbered steps + explanatory captions
+cy = section(s, ML, 3.30, 4.52,
+             "The self-learning operations loop — sharper every day", accent=NAVY,
+             size=10)
+LOOP4 = [("1 · INGEST", "pulls live prices,\nweather & attendance", NAVY),
+         ("2 · FORECAST", "ingredient-level\ndemand per centre", MIDBLUE),
+         ("3 · OPTIMIZE", "computes when &\nwhere to buy", GREEN),
+         ("4 · RECOMMEND", "actionable buying\nsheet for kitchens", ORANGE),
+         ("5 · LEARN", "outcome feedback\ntrains the model", MAGENTA)]
+ccx4, ccy4, r4 = ML + 2.26, 5.13, 0.80
+pts4 = []
+for i, (t, sub, c) in enumerate(LOOP4):
+    ang = math.radians(-90 + i * 72)
+    nx = ccx4 + r4 * math.cos(ang); ny = ccy4 + r4 * math.sin(ang)
+    rect(s, nx - 0.50, ny - 0.19, 1.00, 0.38, fill=c, line=None,
+         shape=MSO_SHAPE.ROUNDED_RECTANGLE, radius=0.30)
+    _, tf = tb(s, nx - 0.50, ny - 0.17, 1.00, 0.34, anchor=MSO_ANCHOR.MIDDLE)
+    para(tf, t, size=7, color=WHITE, bold=True, align=PP_ALIGN.CENTER, first=True,
+         space_after=0, line_spacing=0.9)
+    if i == 0:
+        cxx, cyy = nx, ny - 0.42
+    else:
+        cxx, cyy = nx, ny + 0.42
+    _, tf = tb(s, cxx - 0.65, cyy - 0.15, 1.30, 0.30, anchor=MSO_ANCHOR.MIDDLE)
+    para(tf, sub, size=6.2, color=GRAY, align=PP_ALIGN.CENTER, first=True,
+         space_after=0, line_spacing=0.9)
+    pts4.append((nx, ny))
+for i in range(5):
+    x1, y1 = pts4[i]; x2, y2 = pts4[(i + 1) % 5]
+    mx, my = (x1 + x2)/2, (y1 + y2)/2
+    vx, vy = mx - ccx4, my - ccy4
+    nrm = math.hypot(vx, vy) or 1
+    dotted_arrow(s, x1 + (x2 - x1)*0.34 + vx/nrm*0.09,
+                 y1 + (y2 - y1)*0.34 + vy/nrm*0.09,
+                 x1 + (x2 - x1)*0.66 + vx/nrm*0.09,
+                 y1 + (y2 - y1)*0.66 + vy/nrm*0.09, color=GRAY, width=1.0)
+_, tf = tb(s, ccx4 - 0.55, ccy4 - 0.10, 1.10, 0.22, anchor=MSO_ANCHOR.MIDDLE)
+para(tf, "↻  runs daily", size=6.8, color=NAVY, bold=True, align=PP_ALIGN.CENTER,
+     first=True, space_after=0)
+
+# chart + impact
+cy = section(s, 5.08, 3.30, 4.52,
+             "Rice procurement cost — with vs. without GS funding ($M)",
+             accent=GREEN, size=9.5)
+cd4 = CategoryChartData()
+cd4.categories = ["2026", "2027", "2028", "2029"]
+cd4.add_series("Without GS funding", [10.8, 11.4, 12.0, 12.6])
+cd4.add_series("With GS funding", [9.4, 9.2, 9.1, 9.0])
+gf4 = s.shapes.add_chart(XL_CHART_TYPE.COLUMN_CLUSTERED, Inches(5.08),
+                         Inches(cy - 0.02), Inches(4.52), Inches(1.95), cd4)
+ch4 = gf4.chart
+ch4.font.size = Pt(7); ch4.font.name = SANS; ch4.font.color.rgb = TEXT
+ch4.has_title = False
+ch4.has_legend = True
+ch4.legend.position = XL_LEGEND_POSITION.BOTTOM
+ch4.legend.include_in_layout = False
+ch4.legend.font.size = Pt(7)
+for ser, c in zip(ch4.series, [ORANGE, GREEN]):
+    ser.format.fill.solid(); ser.format.fill.fore_color.rgb = c
+    ser.format.line.fill.background()
+plot4 = ch4.plots[0]
+plot4.gap_width = 80; plot4.overlap = -10
+va4 = ch4.value_axis
+va4.has_major_gridlines = False
+va4.tick_labels.font.size = Pt(6.5)
+va4.tick_labels.number_format = '"$"0"M"'
+va4.tick_labels.number_format_is_linked = False
+ca4 = ch4.category_axis
+ca4.tick_labels.font.size = Pt(7)
+ca4.format.line.color.rgb = LTGRAY
+rect(s, 5.08, cy + 2.00, 4.52, 0.68, fill=GREEN, line=None,
+     shape=MSO_SHAPE.ROUNDED_RECTANGLE, radius=0.10)
+_, tf = tb(s, 5.18, cy + 2.04, 4.32, 0.60, anchor=MSO_ANCHOR.MIDDLE)
+para(tf, "CUMULATIVE 2026–29 IMPACT", size=7, color=WHITE, bold=True,
+     align=PP_ALIGN.CENTER, first=True, space_after=1)
+para(tf, "~$10.1M saved  |  21.6% reduction", size=11.5, color=WHITE, bold=True,
+     align=PP_ALIGN.CENTER, space_after=1)
+para(tf, "freed capital feeds more children", size=7, color=WHITE,
+     align=PP_ALIGN.CENTER, space_after=0, italic=True)
+
+P4W = 3.45
 
 # =====================================================================
 # SLIDE 5
