@@ -35,26 +35,25 @@ We spent three months on this organisation. It started by getting on a plane to 
 ## SPEAKER 2 — HOW IT WORKS *(1:30)*
 ### Job: earn operational respect. They should stop hearing "charity" and start hearing "manufacturing".
 
-**The kitchen we visited starts at four in the morning.**
+What Akshaya Patra has already mastered is the hard part. Eighty kitchens engineered around gravity — raw material in at the top, cooked meals out at the bottom, a hundred thousand children fed from a single building. And a distribution system carrying no inventory at all: food cooked and eaten inside four hours, delivered above sixty-five degrees, across fourteen hundred vehicles, with a fifteen-minute window at every school.
 
-By the time we got there, rice was already cooking — a thousand children's worth, every fifteen minutes. Beside it, a machine producing **forty thousand flatbreads an hour.** The building is designed around gravity: ingredients go in at the top, cooked food comes out at the bottom, and no human hand touches it in between.
+Twenty-five years of engineering, and it works.
 
-One roof. A hundred thousand children.
+So we went to see the other end of it — a government school in Bengaluru.
 
-*[Beat. Change tone — this is where it stops being a tour and becomes a system.]*
+We met [NAME], in class [X]. [He/She] had dropped out the year before. [Father] is a daily-wage labourer.
 
-And then the constraint that reframed this for us.
+When the meal started arriving at that school, [NAME] came back. And the reason is not the one you'd assume. It wasn't hunger.
 
-The food doesn't leave in a truck. It leaves **against a clock.** Cooked rice has to be sealed into a steel vessel and be in front of a child while it is still above **sixty-five degrees.** Fourteen hundred vehicles. Seventy-kilometre routes. A **fifteen-minute delivery window** at every school.
+It was arithmetic. One guaranteed meal a day is one meal that family no longer has to fund. Keeping [NAME] in school stopped costing them money.
 
-There is no warehouse in this supply chain. There is no inventory. Food is manufactured and consumed on the same morning, or it is waste.
+That is what this programme actually is. Not lunch. A transfer to a household, that buys back a child's education.
 
-And there is **no buffer day.** If tomorrow's plan is wrong, you don't correct it next week. A child eats less tomorrow.
+Then we spoke to the teachers. And they told us two things that didn't sound like problems.
 
-We went in expecting a charity that needed money.
+Some days, food arrives for two hundred children when a hundred and sixty turned up.
 
-**We found a manufacturing operation running at genuine world-class discipline — with two points where it is running completely blind.**
-
+And nobody at the kitchen knows the van has arrived — until a teacher picks up the phone and calls them.
 > **HANDOFF →** Speaker 3 picks up "blind" in their opening sentence.
 
 ---
